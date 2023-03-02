@@ -14,12 +14,19 @@ public enum MapType {
 
     //Dedicated
     Lobby("Lobby"),
+    Clans("Clans"),
+    GemHunters("Gem Hunters"),
 
     //Games
     UHC("UHC", "Ultra Hardcore"),
     UHCSolo("Ultra Hardcore Solo", UHC.getFolderName()),
 
+    Bridge("The Bridges"),
+
     Micro("Micro Battle"),
+    TurfWars("Turf Wars"),
+    Sheep("Sheep Quest"),
+    Snake("Snake"),
 
     Skywars("Skywars"),
     SkywarsTeams("Skywars Teams", Skywars.getFolderName());
