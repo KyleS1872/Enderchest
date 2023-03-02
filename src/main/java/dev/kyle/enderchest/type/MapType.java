@@ -1,4 +1,4 @@
-package dev.kyle.enderchest.util;
+package dev.kyle.enderchest.type;
 
 import lombok.Getter;
 

@@ -2,7 +2,7 @@ package dev.kyle.enderchest.controller;
 
 import dev.kyle.enderchest.config.EnderchestConfig;
 import dev.kyle.enderchest.config.ResourceUrls;
-import dev.kyle.enderchest.util.MapType;
+import dev.kyle.enderchest.type.MapType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -40,6 +40,10 @@ public class EnderchestController {
     public ResponseEntity<Resource> getMap(@PathVariable String mapType) throws IOException {
         MapType type = MapType.getEnum(mapType);
 
+        //Unknown Map Type
+        if(type == MapType.Unknown)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
         //Create directory if it does not exist
         File dir = new File(new File(enderchestConfig.getMapsFolder()).getPath() + File.separator + type.getFolderName());
         dir.mkdirs();
@@ -47,7 +51,7 @@ public class EnderchestController {
         //Check if there are maps
         File[] files = dir.listFiles();
         if (files == null || files.length == 0) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
         //Pick a random map
@@ -74,6 +78,10 @@ public class EnderchestController {
     public ResponseEntity<String> postMap(HttpServletRequest request, @PathVariable String mapType, @RequestParam String name) {
         MapType type = MapType.getEnum(mapType);
 
+        //Unknown Map Type
+        if(type == MapType.Unknown)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
         //Create directory if it does not exist
         File dir = new File(new File(enderchestConfig.getMapsFolder()).getPath() + File.separator + type.getFolderName());
         dir.mkdirs();
@@ -81,17 +89,17 @@ public class EnderchestController {
         //Check if the file already exists
         File temp = new File(new File(enderchestConfig.getMapsFolder()).getPath() + File.separator + type.getFolderName() + File.separator + name);
         if (temp.exists())
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
 
         try {
             Files.copy(request.getInputStream(), Paths.get(new File(enderchestConfig.getMapsFolder()).getPath() + File.separator + type.getFolderName() + File.separator + name));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
         //Upload was successful
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
