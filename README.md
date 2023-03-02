@@ -36,7 +36,7 @@ GET /map/{mapType}/next
 
 Uploading a map - uploads your map with the type given.
 ```http request
-POST /map/{mapType}/upload
+POST /map/{mapType}/upload?name=Your_Map.zip
 ```
 
 ## Auto Updater

@@ -90,8 +90,8 @@ public class EnderchestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        //File was accepted and copied
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+        //Upload was successful
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 }
