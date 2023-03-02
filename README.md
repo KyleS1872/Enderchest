@@ -20,12 +20,12 @@ java -jar Enderchest.jar --maps="/home/mineplex/update/maps/"
 
 ## Configurable Arguments
 
-```
-server.port - Port of API (Default: 8010)
-maps - Location of Maps
-update - Location of Updated Jar
-updateScript - Path of update script
-```
+| Property     | Description                                                      | Default Value                                                                          |
+|--------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| server.port  | The port this API/Microservice runs on.                          | 8010                                                                                   |
+| maps         | The location of where maps for game modes are stored.            | Default:`/home/mineplex/update/maps` <br> Windows:`C:\update\maps`                     |
+| update       | The location of where your latest/updated jar would be found.    | Default:`/home/mineplex/update/` <br> Windows:`C:\update`                              |
+| updateScript | The path to where your [update script](#auto-update) is located. | Default:`/home/mineplex/updateMicroservice.sh` <br> Windows:`C:\updateMicroservice.sh` |
 
 ## Endpoints
 
