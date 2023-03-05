@@ -41,7 +41,7 @@ public class EnderchestController {
         MapType type = MapType.getEnum(mapType);
 
         //Unknown Map Type
-        if(type == MapType.Unknown)
+        if (type == MapType.Unknown)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
         //Create directory if it does not exist
@@ -79,7 +79,7 @@ public class EnderchestController {
         MapType type = MapType.getEnum(mapType);
 
         //Unknown Map Type
-        if(type == MapType.Unknown)
+        if (type == MapType.Unknown)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
         //Create directory if it does not exist

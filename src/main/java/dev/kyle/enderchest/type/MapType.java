@@ -37,28 +37,28 @@ public enum MapType {
 
     private final String folderName;
 
-    MapType(String categoryName){
+    MapType(String categoryName) {
         this(categoryName, null);
     }
 
-    MapType(String categoryName, String folderName){
+    MapType(String categoryName, String folderName) {
         this.categoryName = categoryName;
         this.folderName = folderName;
     }
 
-    public String getFolderName(){
-        if(folderName == null)
+    public String getFolderName() {
+        if (folderName == null)
             return categoryName != null ? categoryName : Unknown.categoryName;
 
         return folderName;
     }
 
     public static MapType getEnum(String value) {
-        for(MapType v : values())
-            if(v.getCategoryName().equalsIgnoreCase(value)) return v;
+        for (MapType v : values())
+            if (v.getCategoryName().equalsIgnoreCase(value)) return v;
 
-        for(MapType v : values())
-            if(v.getFolderName().equalsIgnoreCase(value)) return v;
+        for (MapType v : values())
+            if (v.getFolderName().equalsIgnoreCase(value)) return v;
 
         return Unknown;
     }

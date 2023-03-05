@@ -29,10 +29,10 @@ public class Updater {
 
     private final Logger logger = LoggerFactory.getLogger(Updater.class);
 
-    public Updater(String name, String[] arguments, EnderchestConfig enderchestConfig){
+    public Updater(String name, String[] arguments, EnderchestConfig enderchestConfig) {
         this.arguments = arguments;
 
-        if(new File("IgnoreUpdates.dat").exists()){
+        if (new File("IgnoreUpdates.dat").exists()) {
             logger.info("Auto Updater: Disabled");
             return;
         }
@@ -42,7 +42,7 @@ public class Updater {
         _updateFolder = enderchestConfig.getUpdateFolder();
         _updateScript = enderchestConfig.getUpdateScript();
 
-        if(_hash == null){
+        if (_hash == null) {
             logger.warn("Auto Updater: Disabled (Failed to get Jar Hash)");
             return;
         }
@@ -55,19 +55,19 @@ public class Updater {
         executor.scheduleAtFixedRate(updateRunnable, 0, 1, TimeUnit.MINUTES);
     }
 
-    private String getHash(String filePath){
-        try{
+    private String getHash(String filePath) {
+        try {
             String path = new File(filePath).getAbsolutePath();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(Files.readAllBytes(Paths.get(path)));
             byte[] digest = md.digest();
             return Arrays.toString(digest);
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    private void checkForUpdates(){
+    private void checkForUpdates() {
         File file = new File(_updateFolder + _name + ".jar");
 
         if (!file.exists())
@@ -78,7 +78,7 @@ public class Updater {
             update();
     }
 
-    private void update(){
+    private void update() {
         logger.info("Ohhh, a shiny new update was found!");
         logger.info("Attempting to update...");
 
@@ -89,7 +89,7 @@ public class Updater {
         service.schedule(this::executeUpdate, 10, TimeUnit.SECONDS);
     }
 
-    private void executeUpdate(){
+    private void executeUpdate() {
         String cmd = _updateScript;
         String apiName = _name;
 
@@ -99,8 +99,8 @@ public class Updater {
         args.add(apiName);
 
         StringBuilder inputArgs = new StringBuilder();
-        for(String arg : arguments){
-            if(inputArgs.toString().equalsIgnoreCase(""))
+        for (String arg : arguments) {
+            if (inputArgs.toString().equalsIgnoreCase(""))
                 inputArgs = new StringBuilder("\"" + arg + "\"");
             else
                 inputArgs.append(" \"").append(arg).append("\"");
@@ -110,10 +110,10 @@ public class Updater {
 
         ProcessBuilder _processBuilder = new ProcessBuilder(args);
 
-        try{
+        try {
             Process process = _processBuilder.start();
             process.waitFor();
-        }catch(Exception e){
+        } catch (Exception e) {
             logger.error("There was an error trying to update!");
             e.printStackTrace();
             logger.info("A manual update will be required for any new changes!");

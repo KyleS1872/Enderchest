@@ -21,7 +21,7 @@ public class EnderchestApplication {
     private final EnderchestConfig enderchestConfig;
 
     @Autowired
-    public EnderchestApplication(EnderchestConfig enderchestConfig){
+    public EnderchestApplication(EnderchestConfig enderchestConfig) {
         this.enderchestConfig = enderchestConfig;
     }
 
@@ -32,7 +32,7 @@ public class EnderchestApplication {
 
         Map<String, Object> properties = new HashMap<>();
         properties.put("server.port", "8010");
-        properties.put("maps", (System.getProperty("os.name").startsWith("Windows") ? "C:" : File.separator + "home" + File.separator + "mineplex") +  File.separator + "update" + File.separator + "maps" + File.separator);
+        properties.put("maps", (System.getProperty("os.name").startsWith("Windows") ? "C:" : File.separator + "home" + File.separator + "mineplex") + File.separator + "update" + File.separator + "maps" + File.separator);
         properties.put("update", (System.getProperty("os.name").startsWith("Windows") ? "C:" : File.separator + "home" + File.separator + "mineplex") + File.separator + "update" + File.separator);
         properties.put("updateScript", (System.getProperty("os.name").startsWith("Windows") ? "C:" : File.separator + "home" + File.separator + "mineplex") + File.separator + "updateMicroservice.sh");
 
